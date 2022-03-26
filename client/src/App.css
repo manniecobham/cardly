@@ -1,0 +1,119 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  flex-direction: column;
+  background-color: rgb(241, 241, 241);
+
+}
+
+.posts {
+  width: 400px;
+  height: 300px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  border: 1px solid lightgrey;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(240, 233, 233);
+  box-shadow: rgba(71, 71, 71, 0.2) 0px 2px 8px 0px;
+}
+
+.posts:hover {
+  box-shadow: rgba(63, 63, 66, 0.61) 0px 7px 29px 0px;
+  cursor: pointer;
+}
+.posts .title {
+  flex: 20%;
+  border-bottom: 1px solid lightgray;
+  background-color: rgb(18, 160, 153);
+  display: grid;
+  place-content: center;
+  color: white;
+  font-weight: 400;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.posts .body {
+  flex: 60%;
+  display: grid;
+  place-content: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.posts .footer {
+  flex: 20%;
+  border-top: 1px solid lightgray;
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  background-color: rgb(18, 160, 153);
+  color: white;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.posts .footer .time{
+  color: lightgrey;
+  font-size: small;
+  font-weight: 200;
+}
+
+/* Create Post FormPage*/
+
+.createPostPage {
+  font-family: Arial, Helvetica, sans-serif;
+  width: 100vw;
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 500px;
+  height: auto;
+  padding: 20px;
+  border: 5px solid rgb(18, 160, 153);
+  border-radius: 5px;
+}
+
+.formContainer #inputCreatePost {
+  height: 40px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 2px solid grey;
+  border-radius: 5px;
+  padding-left: 10px;
+  font-size: 20px;
+}
+
+.formContainer button {
+  margin-top: 15px;
+  height: 40px;
+  border: none;
+  background-color: rgb(81, 139, 138);
+  border-radius: 5px;
+  color: white;
+}
+
+.formContainer button:hover {
+  cursor: pointer;
+  background-color: rgb(18, 160, 153);
+}
+
+span {
+  color: red;
+}
