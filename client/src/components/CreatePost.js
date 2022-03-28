@@ -2,6 +2,7 @@ import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
+import { useHistory} from "react-router-dom";
 
 function CreatePost() {
 
@@ -11,13 +12,17 @@ function CreatePost() {
         username: "",
     };
 
+    const history = useHistory()
+
     const onSubmit = (data) => {
         axios.post("http://localhost:3001/posts", data).then((response) => {
             // setListOfPost(response.data)
+            history.push('/')
             console.log("Worked!!!")
         })
         
     };
+    
 
     const validationSchema = Yup.object().shape({
         title: Yup.string().required(),
