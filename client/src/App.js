@@ -12,6 +12,8 @@ function App() {
         <div className="navbar">
           <Link to="/">Home Page</Link>
           <Link to="/newpost"> Create A Post</Link>
+          <Link to="/login">Login</Link>
+          <Link to="/registration">Register</Link>
         </div>
         <Switch>
           <div className="pageItems">
