@@ -23,11 +23,24 @@ function Post() {
     const addComment = ()=> {
         axios.post("http://localhost:3001/comments", {
             commentBody: newComment, PostId: id
-        }).then((response) => {
-            console.log("Comment Added");
-            const commentToAdd = {commentBody: newComment};
+        },{
+            headers:{
+                accessToken: localStorage.getItem("accessToken")
+            }
+        }
+        ).then((response) => {
+            if(response.data.error) {
+                alert ("You are not logged in");
+                console.log(response.data.error)
+            } 
+            else 
+            {
+
+            //console.log("Comment Added");
+            const commentToAdd = {commentBody: newComment, username: response.data.username};
             setComments([...comments, commentToAdd]);
             setNewComment("")
+            }
         })
     }
 
@@ -49,7 +62,8 @@ function Post() {
                     {comments.map((comment, key) => {
                         return (
                             <div key={key} className='comment'>
-                                {comment.commentBody}
+                                {comment.commentBody} <br/>
+                                @{comment.username}
                             </div>
                         )
                     })}

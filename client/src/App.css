@@ -135,6 +135,15 @@ span {
   position: fixed;
 
 }
+.navbar button {
+  align-items: left;
+  text-decoration: none;
+  color: white;
+  background-color: transparent;
+  height: 100%;
+  margin-left: 50px;
+  cursor: pointer;
+}
 
 .navbar a {
   padding-left: 20px;
@@ -245,10 +254,37 @@ button {
 }
 
 .loginContainer button {
-  background-color: dodgerblue;
+  background-color: rgb(18, 160, 153);
   color: white;
 }
 
 .loginContainer input {
-  border: 2px solid dodgerblue;
+  border: 2px solid rgb(18, 160, 153);
+}
+
+.loginContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  padding-top: 100px;
+}
+
+.loginContainer input,
+button {
+  width: 200px;
+  height: 50px;
+  border-radius: 8px;
+  border: none;
+  margin: 10px;
+}
+
+.loginContainer button {
+  background-color: rgb(18, 160, 153);
+  color: white;
+}
+
+.loginContainer input {
+  border: 2px solid rgb(18, 160, 153);
 }
