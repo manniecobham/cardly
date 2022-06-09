@@ -5,9 +5,12 @@ import CreatePost from './components/CreatePost';
 import Post from './components/Post';
 import Login from './components/Login';
 import Registration from './components/Registration';
+import PageNotFound from './components/PageNotFound';
 import { AuthContext } from './helpers/AuthContext';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import Profile from './components/Profile';
+import NewPassword from './components/NewPassword';
 
 function App() {
   const [authState, setAuthState] = useState({
@@ -38,8 +41,12 @@ function App() {
   }, []);
   const onLogout = () => {
     localStorage.removeItem("accessToken");
-    setAuthState({ ...authState, status: false });
-  }
+    setAuthState({
+      username: "",
+      id: 0,
+      status: false
+    });
+  };
 
 
 
@@ -48,12 +55,11 @@ function App() {
       <AuthContext.Provider value={{ authState, setAuthState }}>
         <Router>
           <div className="navbar">
-            <Link to="/">Home Page</Link>
-            <Link to="/newpost"> Create A Post</Link>
-
-            {
-              //!localStorage.getItem('accessToken')
-              !authState ?
+            <div className="links">
+              
+              {
+                //!localStorage.getItem('accessToken')
+                !authState.status ?
                 (
                   <>
                     <Link to="/login">Login</Link>
@@ -61,12 +67,15 @@ function App() {
                   </>
                 ) : (
                   <>
-                    <button onClick={onLogout}
-                    >Sign Out</button>
+                  <Link to="/">Home</Link>
+                  <Link to="/newpost"> Create Post</Link>
                   </>
-                )
-            }
-            <h1> {authState.username} </h1>
+                )} </div>
+
+            <div className='loggedInContainer'>
+              <h1> {authState.username} </h1>
+              {authState.status && <button onClick={onLogout}>Sign Out</button>}
+            </div>
           </div>
           <Switch>
             <div className="pageItems">
@@ -75,7 +84,10 @@ function App() {
               <Route path="/post/:id" exact component={Post} />
               <Route path="/login" exact component={Login} />
               <Route path="/registration" exact component={Registration} />
+              <Route path="/profile/:id" exact component={Profile} />
+              <Route path="/newpassword" exact component={NewPassword} />
             </div>
+            <Route path="*" exact component={PageNotFound} />
           </Switch>
         </Router>
       </AuthContext.Provider>

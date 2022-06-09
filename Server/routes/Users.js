@@ -2,8 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { Users } = require("../models");
 const bcrypt = require("bcrypt");
-const {validateToken} = require('../middleware/AuthMiddleware')
-
+const {validateToken} = require('../middleware/AuthMiddleware');
 const { sign } = require('jsonwebtoken');
 
 
@@ -22,23 +21,45 @@ router.post('/', async (req, res) => {
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
 
-    const userDetail = await Users.findOne({ where: { username: username } });
+    const user = await Users.findOne({ where: { username: username } });
     
-    if (!userDetail) res.json({ error: "User Does not exist" });
+    if (!user) res.json({ error: "User Does not exist" });
 
-    bcrypt.compare(password, userDetail.password).then((match) => {
+    bcrypt.compare(password, user.password).then((match) => {
         if (!match) res.json({ error: "Wrong Username And Password Combo!" });
 
         const accessToken = sign(
-            { username: userDetail.username, id: userDetail.id },
+            { username: user.username, id: user.id },
             "important"
         );
-        res.json(accessToken);
+        res.json({token: accessToken, username: username, id: user.id});
     });
 });
 
 router.get('/auth', validateToken, (req, res) => {
     res.json(req.user);
-})
+});
+
+router.get('/basicinfo/:id', async (req, res) => {
+    const id = req.params.id;
+    const user = await Users.findByPk(id, {attributes: {exclude: ['password']}});
+    res.json(user);
+});
+
+router.put('/changepassword', validateToken, async (req, res) => {
+    const { oldPassword, newPassword } = req.body;
+    const user = await Users.findOne({where: {username: req.user.username}});
+
+    bcrypt.compare(oldPassword, user.password).then(async (match) => {
+        if (!match) res.json({ error: "Wrong Old Password!" });
+
+        bcrypt.hash(newPassword, 10).then((hash) => {
+           Users.update({
+                password: hash
+            }, {where: {username: req.user.username}});
+            res.json("Success");
+        });
+    });
+});
 
 module.exports = router;

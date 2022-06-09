@@ -7,7 +7,7 @@ import { AuthContext } from '../helpers/AuthContext';
 function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const { setAuthState } = useContext(AuthContext)
+    const { setAuthState } = useContext(AuthContext);
 
     let history = useHistory()
 
@@ -17,12 +17,11 @@ function Login() {
             if (response.data.error) {
                 alert(response.data.error)
             } else {
-                localStorage.setItem("accessToken", response.data);
-                setAuthState(true);
+                localStorage.setItem("accessToken", response.data.token);
+                setAuthState({ username: response.data.username, id: response.data.id, status: true });
                 history.push("/");
-            }
-
-            console.log(response.data)
+               // console.log(response.data)
+            }  
         })
     };
 
