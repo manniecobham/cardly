@@ -68,7 +68,7 @@ function Home() {
           accessToken: localStorage.getItem("accessToken")
         }
       }).then((response) => {
-        setListOfPost(response.data.listOfPosts).sort((a, b) =>  a.id > b.id ? 1 : -1);
+        setListOfPost(response.data.listOfPosts);
         setLikedPosts(response.data.likedPosts.map((like) => {
           return like.PostId;
         })

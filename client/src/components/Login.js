@@ -20,25 +20,41 @@ function Login() {
                 localStorage.setItem("accessToken", response.data.token);
                 setAuthState({ username: response.data.username, id: response.data.id, status: true });
                 history.push("/");
-               // console.log(response.data)
-            }  
+                // console.log(response.data)
+            }
         })
     };
 
     return (
-        <div className="loginContainer">
-            <label>Username:</label>
-            <input type="text"
-                onChange={(event) => {
-                    setUsername(event.target.value);
-                }}
-            />
-            <label>Password:</label>
-            <input type="password"
-                onChange={(event) => {
-                    setPassword(event.target.value);
-                }} />
-            <button onClick={login}>Login</button>
+        <div className="login-box">
+            <h2>Login Here</h2>
+            <div className='Form1'>
+                <div className='user-box'>
+                    {/*  */}
+                    <input type="text"
+                        placeholder='Username'
+                        onChange={(event) => {
+                            setUsername(event.target.value);
+                        }}
+                    />
+                    <label>Username:</label>
+                </div>
+                <div className='user-box'>
+                    <input type="password"
+                        placeholder='Password'
+                        onChange={(event) => {
+                            setPassword(event.target.value);
+                        }} />
+                    <label>Password:</label>
+                </div>
+                <button onClick={login}>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    Login
+                </button>
+            </div>
         </div>
     )
 }

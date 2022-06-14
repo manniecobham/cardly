@@ -16,8 +16,12 @@ function Registration() {
   });
 
   const onSubmit = (data)  => {
-    axios.post("http://localhost:3001/auth", data).then(()=>{
-      console.log(data);
+    axios.post("http://localhost:3001/auth", data).then((response)=>{
+      if(response.data.error){
+        alert(response.data.error)
+      }else{
+      console.log(response.data);
+      }
     });
   };
 
@@ -29,9 +33,11 @@ function Registration() {
                 initialValues={initialValues}
                 onSubmit={onSubmit}
                 validationSchema={validationSchema}>
-                <Form className="formContainer">
-                   
-                    <label>Username:</label>
+                <Form className="login-box">
+                   <h2>Create Username & Password</h2>
+                   <div className="Form1">
+                     <div className="user-box">
+                    
                     <ErrorMessage name="username" component="span" />
                     <Field
                         id="inputCreatePost"
@@ -39,7 +45,9 @@ function Registration() {
                         autocomplete="off"
                         placeholder="your username..."
                     />
-                    <label>Password:</label>
+                    <label>Username:</label>
+                    </div>
+                    <div className="user-box">
                     <ErrorMessage name="password" component="span" />
                     <Field
                         id="inputCreatePost"
@@ -48,8 +56,16 @@ function Registration() {
                         placeholder="your Password..."
                         autocomplete="off"
                     />
-
-                    <button type="submit">Submit</button>
+                    <label>Password:</label>
+                    </div>
+                    <button type="submit">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      Submit
+                      </button>
+                </div>
                 </Form>
             </Formik>
     </div>

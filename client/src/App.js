@@ -11,6 +11,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Profile from './components/Profile';
 import NewPassword from './components/NewPassword';
+import Navbar from './components/Navbar';
 
 function App() {
   const [authState, setAuthState] = useState({
@@ -18,6 +19,8 @@ function App() {
     id: 0,
     status: false
   });
+
+  const [ popUp, SetPopUp ] = useState(false);
 
   useEffect(() => {
     axios.get('http://localhost:3001/auth/auth', {
@@ -39,46 +42,18 @@ function App() {
     //   setAuthState(true);
     // }
   }, []);
-  const onLogout = () => {
-    localStorage.removeItem("accessToken");
-    setAuthState({
-      username: "",
-      id: 0,
-      status: false
-    });
+
+  const onPopUp = () => {
+    SetPopUp(false);
   };
-
-
-
+  
   return (
     <div className="App">
-      <AuthContext.Provider value={{ authState, setAuthState }}>
+      <AuthContext.Provider value={{ authState, setAuthState, popUp, SetPopUp }}>
         <Router>
-          <div className="navbar">
-            <div className="links">
-              
-              {
-                //!localStorage.getItem('accessToken')
-                !authState.status ?
-                (
-                  <>
-                    <Link to="/login">Login</Link>
-                    <Link to="/registration">Register</Link>
-                  </>
-                ) : (
-                  <>
-                  <Link to="/">Home</Link>
-                  <Link to="/newpost"> Create Post</Link>
-                  </>
-                )} </div>
-
-            <div className='loggedInContainer'>
-              <h1> {authState.username} </h1>
-              {authState.status && <button onClick={onLogout}>Sign Out</button>}
-            </div>
-          </div>
+          <Navbar />
           <Switch>
-            <div className="pageItems">
+            <div className="pageItems" onClick={onPopUp}>
               <Route path="/" exact component={Home} />
               <Route path="/newpost" exact component={CreatePost} />
               <Route path="/post/:id" exact component={Post} />
@@ -91,6 +66,10 @@ function App() {
           </Switch>
         </Router>
       </AuthContext.Provider>
+
+      <div className='Banner'>
+        This is a demo project by Emmanuel Cobham.
+      </div>
     </div>
   );
 }

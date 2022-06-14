@@ -112,19 +112,30 @@ function Post() {
                     <div className="title"> {postObject.title} {authState.username === postObject.username && <ModeEditIcon onClick={() => { editPost("title") }} />}</div>
                     <div className="body"> {postObject.postText} {authState.username === postObject.username && <ModeEditIcon onClick={() => { editPost("post") }} />}</div>
                     <div className="footer">
-                        {postObject.username}
+                        <div className="username">
+                        @{postObject.username}
+                        </div>
                         {authState.username === postObject.username &&
-                            <DeleteForeverOutlinedIcon onClick={() => { deletePost(postObject.id) }} />
+                            <div className="deletePost" onClick={() => { deletePost(postObject.id) }}>
+                                Delete Post
+                                <DeleteForeverOutlinedIcon
+                                className="deleteIcon"
+                                    />
+                            </div>
                         }
                     </div>
+
                 </div>
             </div>
             <div className="rightSide">
+                <h3>Comments</h3> 
                 <div className="addCommentContainer">
-                    <input type="text" value={newComment} placeholder='Comment here' onChange={(event) => { setNewComment(event.target.value) }} />
+                    <input type="textarea" value={newComment} placeholder='Comment here' onChange={(event) => { setNewComment(event.target.value) }} />
                     <button onClick={addComment}>Add Comment</button>
                 </div>
+                
                 <div className="listOfComments">
+                    
                     {comments.map((comment, key) => {
                         return (
                             <div key={key} className='comment'>

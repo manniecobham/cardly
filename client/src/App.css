@@ -8,6 +8,17 @@ body {
   margin-top: 80px;
 }
 
+.Banner {
+  background-color: #f5f5f5;
+  padding: 5px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  background: rgb(81, 81, 83);
+  background: linear-gradient(185deg, rgba(2,0,36,1) 0%, rgba(127,188,193,1) 34%, rgba(18,160,157,1) 85%, rgba(17,149,149,1) 95%, rgba(0,212,255,1) 100%);
+}
+
 .App {
   width: 100%;
   height: auto;
@@ -188,35 +199,39 @@ span {
   color: white;
   
 }
-.navbar h1 {
-  text-align: right;
-  margin-right: 10px;
+.navbar .profile-pic {
   color: white;
-  font-weight: lighter;
+  height: 100%;
 }
 
 /* INDIVIDUAL POST */
 .postPage {
-  display: flex;
-  flex-direction: row;
   width: 100%;
   height: 100%;
+  padding: 40px;
+  font-family: sans-serif;
+  background: rgb(233, 233, 233);
+  border-radius: 10px;
+  box-shadow: 0 15px 20px 0 rgba(0, 0, 0, 0.5) ;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
 }
 
-.leftSide {
-  flex: 50%;
-  height: calc(100vh - 70px);
-  display: grid;
-  place-items: center;
-}
+
 
 .rightSide {
   flex: 50%;
-  height: calc(100vh - 70px);
+  /* height: calc(100vh - 70px); */
   display: grid;
   place-items: center;
   display: flex;
   flex-direction: column;
+  border: 1px solid lightgrey;
+  justify-content: center;
+  height: 100%;
+  width: 50vh;
 }
 
 .rightSide .addCommentContainer {
@@ -231,17 +246,31 @@ span {
 button {
   width: 200px;
   height: 50px;
-  border-radius: 8px;
+  /* border-radius: 8px; */
   border: none;
 }
 
 .addCommentContainer button {
   background-color: rgb(18, 160, 153);
   color: white;
+  border-radius: 0;
+  transition: 2.5s;
+}
+
+.addCommentContainer button:hover {
+  cursor: pointer;
+  background: rgb(2,0,36);
+  transition: 2.5s;
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(14,117,124,1) 21%, rgba(18,160,157,1) 85%, rgba(17,149,149,1) 95%, rgba(0,212,255,1) 100%);
 }
 
 .addCommentContainer input {
-  border: 2px solid rgb(18, 160, 153);
+  border: 1px solid lightgrey;
+  width: 80%;
+}
+
+.addCommentContainer input:focus {
+  outline: none;
 }
 
 .rightSide .listOfComments {
@@ -260,14 +289,64 @@ button {
   margin-top: 20px;
 }
 
-#individual {
-  height: 500px;
-  width: 600px;
+.leftSide {
+  flex: 50%;
+  height: calc(100vh - 70px);
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  width: 50vh;
 }
 
-#individual .title,
-#individual .footer {
+.leftSide #individual {
+  height: 100%;
+  width: 100%;
+}
+
+.leftSide #individual .title {
   font-size: 30px;
+  font-weight: bold;
+  padding: 5px;
+  margin-bottom: 20px;
+  text-align: center;
+  background-color: #969695;
+}
+.leftSide #individual .footer {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+}
+.leftSide #individual .footer .username {
+  font-size: 15px;
+  font-weight: bold;
+  margin-left: 0;
+  text-decoration: underline;
+  color: rgb(40, 39, 42);
+}
+.leftSide #individual .footer .deletePost {
+  font-size: 15px;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+  border: 1px solid lightgrey;
+  width: 100%;
+  padding: 4px;
+}
+
+.leftSide #individual .footer .deletePost:hover {
+  cursor: pointer;
+  background-color: lightgrey;
+}
+
+.leftSide #individual .footer .deletePost .deleteIcon {
+  color: red;
+  border-radius: 0;
+  transition: 2.5s;
+  align-items: center;
 }
 
 #individual .body {
@@ -328,4 +407,243 @@ button {
 
 .loginContainer input {
   border: 2px solid rgb(18, 160, 153);
+}
+
+/* New Password */
+.login-box {
+  font-family: sans-serif;
+  width: 400px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  box-shadow: 0 15px 25px 0 rgba(0, 0, 0, 0.5) ;
+  /* , 0 5px 5px 0 rgba(0, 0, 0, 0.24); */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 40px;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+}
+
+.login-box h2 {
+  text-align: center;
+  color: #ffffff;
+  margin: 0 0 30px;
+  padding: 0;
+}
+
+.login-box .user-box {
+  position: relative;
+  /* margin: 0 0 20px;
+  padding: 0; */
+}
+
+.login-box .user-box input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #fff;
+  background: transparent;
+  outline: none;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 30px;
+}
+
+.login-box .user-box label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  /* pointer-events: none; */
+  transition: 0.5s;
+}
+
+.login-box .user-box input:focus ~ label,
+.login-box .user-box input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: #03e9f4;
+  font-size: 12px;
+  /* border: 1px solid red; */
+}
+
+.login-box .Form1 button {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  color: rgb(18, 160, 153);
+  /* border: none; */
+  padding: 10px 20px;
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: 0.5s;
+  margin-top: 40px;
+  letter-spacing: 4px;
+  border-radius: 0%;
+}
+
+.login-box .Form1 button:hover {
+  background: rgba(18, 160, 153, 0.2);
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(18, 160, 153, 0.5),
+  0 0 25px rgba(18, 160, 153, 0.5),
+  0 0 50px rgba(18, 160, 153, 0.5),
+  0 0 100px rgba(18, 160, 153, 0.5);
+}
+
+.login-box button span {
+  position: absolute;
+  display: block;
+}
+
+.login-box button span:nth-child(1) {
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #03e9f4) ;
+  /* transition: 0.5s; */
+  animation: btn-anim1 1s linear infinite;
+  /* animation-delay: 0.25s; */
+}
+@keyframes btn-anim1 {
+  0% {
+    left: -100%;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+ .login-box button span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #03e9f4) ;
+  animation: btn-anim2 1s linear infinite;
+  animation-delay: 0.25s;
+}
+
+@keyframes btn-anim2 {
+  0% {
+    top: -100%;
+  }
+  50% {
+    top: 100%;
+  }
+  100% {
+    top: 100%;
+  }
+}
+
+.login-box button span:nth-child(3) {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #03e9f4) ;
+  /* transition: 0.5s; */
+  animation: btn-anim3 1s linear infinite;
+  animation-delay: 0.5s;
+}
+
+@keyframes btn-anim3 {
+  0% {
+    right: -100%;
+  }
+  50% {
+    right: 100%;
+  }
+  100% {
+    right: 100%;
+  }
+}
+
+.login-box button span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #03e9f4) ;
+  /* transition: 0.5s; */
+  animation: btn-anim4 1s linear infinite;
+  animation-delay: 0.75s;
+}
+
+@keyframes btn-anim4 {
+  0% {
+    bottom: -100%;
+  }
+  50% {
+    bottom: 100%;
+  }
+  100% {
+    bottom: 100%;
+  }
+} 
+
+/* PopUp */
+
+.profile {
+  width: 100%;
+  margin-left: 80%;
+  display: flex;
+  flex-direction: column;
+}
+.popup {
+  position: fixed;
+  top: 20vh;
+  left: 90%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.2);
+  background: #fff;
+  border-radius: 5px;
+  width: 120px;
+  padding: 3px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  border: 1px solid #969695;
+}
+.popup-inner {
+  /* display: flex; */
+  /* flex-direction: column; */
+  justify-content: center;
+  align-items: center;
+}
+.popup ul {
+  list-style: none;
+  text-align: center;
+  font-weight: 400;
+  padding: 0;
+  margin: 0;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid #969695; */
+}
+
+.popup ul li {
+  display: block;
+  padding: 5px;
+  border-bottom: 1px solid #969695;
+  cursor: pointer;
+}
+.popup ul li:last-child {
+  border-bottom: none;
+  /* padding-bottom: 0; */
+}
+.popup ul li:hover {
+  background-color:  #a7a7a7;
+  color: #fff;
+  cursor: pointer;
 }
