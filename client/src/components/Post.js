@@ -15,18 +15,18 @@ function Post() {
     const { authState } = useContext(AuthContext);
 
     useEffect(() => {
-        axios.get(`http://localhost:3001/posts/byId/${id}`).then((response) => {
+        axios.get(`https://mannie-blog.herokuapp.com/posts/byId/${id}`).then((response) => {
             setPostObject(response.data);
             console.log(response.data);
         });
 
-        axios.get(`http://localhost:3001/comments/${id}`).then((response) => {
+        axios.get(`https://mannie-blog.herokuapp.com/comments/${id}`).then((response) => {
             setComments(response.data);
         });
     }, []);
 
     const addComment = () => {
-        axios.post("http://localhost:3001/comments", {
+        axios.post("https://mannie-blog.herokuapp.com/comments", {
             commentBody: newComment, PostId: id
         }, {
             headers: {
@@ -48,7 +48,7 @@ function Post() {
     };
 
     const deleteComment = (id) => {
-        axios.delete(`http://localhost:3001/comments/${id}`,
+        axios.delete(`https://mannie-blog.herokuapp.com/comments/${id}`,
             {
                 headers:
                 {
@@ -63,7 +63,7 @@ function Post() {
     };
 
     const deletePost = () => {
-        axios.delete(`http://localhost:3001/posts/${id}`,
+        axios.delete(`https://mannie-blog.herokuapp.com/posts/${id}`,
             {
                 headers:
                 {
@@ -80,7 +80,7 @@ function Post() {
         if (option === "title") {
             // history.push(`/title/${id}`);
             let newTitle = prompt("Enter new title");
-            axios.put(`http://localhost:3001/posts/title`, { newTitle: newTitle, id: id }, {
+            axios.put(`https://mannie-blog.herokuapp.com/posts/title`, { newTitle: newTitle, id: id }, {
                 headers:
                 {
                     accessToken: localStorage.getItem("accessToken")
@@ -91,7 +91,7 @@ function Post() {
         } else {
             //deletePost();
             let newPost = prompt("Enter new post");
-            axios.put(`http://localhost:3001/posts/body`, { newPost: newPost, id: id }, {
+            axios.put(`https://mannie-blog.herokuapp.com/posts/body`, { newPost: newPost, id: id }, {
                 headers:
                 {
                     accessToken: localStorage.getItem("accessToken")

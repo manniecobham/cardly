@@ -23,7 +23,7 @@ function App() {
   const [ popUp, SetPopUp ] = useState(false);
 
   useEffect(() => {
-    axios.get('http://localhost:3001/auth/auth', {
+    axios.get('https://mannie-blog.herokuapp.com/auth/auth', {
       headers: {
         accessToken: localStorage.getItem("accessToken"),
       }

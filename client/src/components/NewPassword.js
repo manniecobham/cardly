@@ -9,7 +9,7 @@ function NewPassword() {
   const [clearFields, setClearFields] = useState("");
 
   const changePassword = () => {
-    axios.put('http://localhost:3001/auth/changepassword', {
+    axios.put('https://mannie-blog.herokuapp.com/auth/changepassword', {
       oldPassword: oldPassword, newPassword: newPassword
     }, {
       headers: {

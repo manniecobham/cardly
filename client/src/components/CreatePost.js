@@ -24,7 +24,7 @@ function CreatePost() {
 
     const onSubmit = (data) => {
 
-        axios.post("http://localhost:3001/posts", data, {headers: {accessToken: localStorage.getItem('accessToken')}}).then((response) => {
+        axios.post("https://mannie-blog.herokuapp.com/posts", data, {headers: {accessToken: localStorage.getItem('accessToken')}}).then((response) => {
             // setListOfPost(response.data)
             history.push('/')
            // console.log("Worked!!!")
@@ -60,6 +60,7 @@ function CreatePost() {
                         id="inputCreatePost"
                         name="postText"
                         placeholder="Write your post..."
+                        x-webkit-speech 
                     />
 
                     {/* {<label>Username:</label>

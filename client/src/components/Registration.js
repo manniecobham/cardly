@@ -16,7 +16,7 @@ function Registration() {
   });
 
   const onSubmit = (data)  => {
-    axios.post("http://localhost:3001/auth", data).then((response)=>{
+    axios.post("https://mannie-blog.herokuapp.com/auth", data).then((response)=>{
       if(response.data.error){
         alert(response.data.error)
       }else{

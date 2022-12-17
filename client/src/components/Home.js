@@ -15,7 +15,7 @@ function Home() {
   let history = useHistory();
 
   const likeAPost = (PostId) => {
-    axios.post("http://localhost:3001/likes", {
+    axios.post("https://mannie-blog.herokuapp.com/likes", {
       PostId: PostId
     }, {
       headers: {
@@ -29,7 +29,7 @@ function Home() {
         console.log(response.data.error)
       }
       else {
-      //  alert(response.data.message);
+        //  alert(response.data.message);
         setListOfPost(listOfPosts.map((val) => {
           if (val.id === PostId) {
             if (response.data.liked) {
@@ -63,7 +63,7 @@ function Home() {
     if (!localStorage.getItem("accessToken")) {
       history.push("/login");
     } else {
-      axios.get("http://localhost:3001/posts", {
+      axios.get("https://mannie-blog.herokuapp.com/posts", {
         headers: {
           accessToken: localStorage.getItem("accessToken")
         }
@@ -78,40 +78,44 @@ function Home() {
   }, [])
 
   return (
-    <div>
-      {listOfPosts.sort((a, b) => a.createdAt > b.createdAt ? 1 : -1).map((value, key) => {
+    <div className="home">
+    <div className="home-grid">
+      {listOfPosts.sort((a, b) => b.id  - a.id).map((value, key) => {
         return (
-          <div key={key} className="posts" onDoubleClick={()=> {likeAPost(value.id)}}>
+          <div>
+            <div key={key} className="posts" onDoubleClick={() => { likeAPost(value.id) }}>
 
-            <div className="title"> {value.title}</div>
-            <div
-              className="body"
-              onClick={() => {
-                history.push(`/post/${value.id}`);
-              }}
-            >
+              <div className="title"> {value.title}</div>
+              <div
+                className="body"
+                onClick={() => {
+                  history.push(`/post/${value.id}`);
+                }}
+              >
               {value.postText}
-            </div>
-            <div className="footer">
-              <div className="username">
-                <Link to= {`/profile/${value.UserId}`}>{value.username}</Link>
               </div>
-              <div className="buttons">
-                <FavoriteIcon
-                  onClick={() => {
-                    likeAPost(value.id);
-                  }}
-                  className={
-                    likedPosts.includes(value.id) ? "unlikeBttn" : "likeBttn"
-                  }
-                />
-                <label>{value.Likes.length}</label>
-                {/* <div className="time"> {value.createdAt} </div>  */}
+              <div className="footer">
+                <div className="username">
+                  <Link to={`/profile/${value.UserId}`}>{value.username}</Link>
+                </div>
+                <div className="buttons">
+                  <FavoriteIcon
+                    onClick={() => {
+                      likeAPost(value.id);
+                    }}
+                    className={
+                      likedPosts.includes(value.id) ? "unlikeBttn" : "likeBttn"
+                    }
+                  />
+                  <label>{value.Likes.length}</label>
+                  {/* <div className="time"> {value.createdAt} </div>  */}
+                </div>
               </div>
             </div>
           </div>
         );
       })}
+    </div>
     </div>
   )
 }
